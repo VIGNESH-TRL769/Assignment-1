@@ -16,7 +16,6 @@ class BankAccount
     }
     public void getAccountDetails()
     {
-        LOGGER.log(Level.INFO,"\nHolderName:"+name);
         LOGGER.log(Level.INFO,Double.toString(accountNumber),"\nAccountNumber:"+accountNumber);
         LOGGER.log(Level.INFO,Double.toString(balance),"\nBalance:"+balance+"0\n");
     }
