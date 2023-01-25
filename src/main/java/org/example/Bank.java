@@ -17,20 +17,20 @@ class BankAccount
     public void getAccountDetails()
     {
         LOGGER.log(Level.INFO,"\nHolderName:"+name);
-        LOGGER.log(Level.INFO,"\nAccountNumber:"+accountNumber);
-        LOGGER.log(Level.INFO,"\nBalance:"+balance+"0\n");
+        LOGGER.log(Level.INFO,Double.toString(accountNumber),"\nAccountNumber:"+accountNumber);
+        LOGGER.log(Level.INFO,Double.toString(balance),"\nBalance:"+balance+"0\n");
     }
     public void deposite(int amount)
     {
         balance+=amount;
-        LOGGER.log(Level.INFO,"\nDeposite of Amount Rs "+amount+".00 is Successfully\n");
+        LOGGER.log(Level.INFO,Double.toString(amount),"\nDeposite of Amount Rs "+amount+".00 is Successfully\n");
     }
     public void withdraw(int amount)
     {
         if(balance-amount>=100)
         {
             balance-=amount;
-            LOGGER.log(Level.INFO,"\nWithdraw of Amount Rs:"+amount+".00 is Successfully\n");
+            LOGGER.log(Level.INFO,Double.toString(amount),"\nWithdraw of Amount Rs:"+amount+".00 is Successfully\n");
         }
         else
             LOGGER.log(Level.INFO,"\nWithdrawal Limit Above Rs:100");
@@ -68,7 +68,7 @@ public class Bank {
                     if (bankAccount.balance >= 100)
                         bankAccount.withdraw(withdrawAmount);
                     else
-                        LOGGER.log(Level.INFO,"\nMinimum Balance Should be Rs:100 You having Balance Amount=%.2f", bankAccount.balance);
+                        LOGGER.log(Level.INFO,Double.toString(bankAccount.balance),"\nMinimum Balance Should be Rs:100 You having Balance Amount="+bankAccount.balance+"0 ");
                 }
                 case 3 -> bankAccount.getAccountDetails();
                 case 4 -> temp1 = 1;
