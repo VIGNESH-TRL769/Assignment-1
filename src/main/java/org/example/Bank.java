@@ -1,11 +1,11 @@
 package org.example;
 
 import java.util.Scanner;
-import java.util.logging.Level;
+
 import java.util.logging.Logger;
 class BankAccount
 {
-    private static final Logger LOGGER =  Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    public static final Logger LOGGER =  Logger.getLogger("InfoLogging");
     private final String name;
     private final Long accountNumber;
     Double balance=0.0D;
@@ -16,66 +16,70 @@ class BankAccount
     }
     public void getAccountDetails()
     {
-        LOGGER.log(Level.INFO,Double.toString(accountNumber),"\nAccountNumber:"+accountNumber);
-        LOGGER.log(Level.INFO,Double.toString(balance),"\nBalance:"+balance+"0\n");
+        String print="\nHolderName:"+name+"\nAccountNumber:"+accountNumber+"\nBalance:"+balance+"0\n";
+        LOGGER.info(print);
     }
     public void deposite(int amount)
     {
         balance+=amount;
-        LOGGER.log(Level.INFO,Double.toString(amount),"\nDeposite of Amount Rs "+amount+".00 is Successfully\n");
+        String print="\nDeposite of Amount Rs "+amount+".00 is Successfully\n";
+       LOGGER.info(print);
     }
     public void withdraw(int amount)
     {
         if(balance-amount>=100)
         {
             balance-=amount;
-            LOGGER.log(Level.INFO,Double.toString(amount),"\nWithdraw of Amount Rs:"+amount+".00 is Successfully\n");
+            String print="\nWithdraw of Amount Rs:"+amount+".00 is Successfully\n";
+           LOGGER.info(print);
         }
         else
-            LOGGER.log(Level.INFO,"\nWithdrawal Limit Above Rs:100");
+           LOGGER.info("\nWithdrawal Limit Above Rs:100");
     }
 
 }
 
 
-public class Bank {
-    private static final Logger LOGGER =  Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+public class Bank  {
+    public static final Logger LOGGER =  Logger.getLogger("InfoLogging");
     public static void main(String[] args)
     {
         Scanner input=new Scanner(System.in);
-        LOGGER.log(Level.INFO,"\nEnter the HolderName:");
+       LOGGER.info("\nEnter the HolderName:");
         String name=input.nextLine();
-        LOGGER.log(Level.INFO,"\nEnter the AccountNumber:");
+       LOGGER.info("\nEnter the AccountNumber:");
         long accountNumber=input.nextLong();
         BankAccount bankAccount=new BankAccount(name,accountNumber);
 
         while(true)
         {
-            LOGGER.log(Level.INFO,"\n1.deposite\n2.withdraw\n3.balance\n4.Exit\n");
-            LOGGER.log(Level.INFO,"\nEnter the Choice:");
+           LOGGER.info("\n1.deposite\n2.withdraw\n3.balance\n4.Exit\n");
+           LOGGER.info("\nEnter the Choice:");
             int value=input.nextInt();
             int temp1=0;
             switch (value) {
                 case 1 -> {
-                    LOGGER.log(Level.INFO,"\nEnter the deposite Amount:");
+                   LOGGER.info("\nEnter the deposite Amount:");
                     int depositeAmount = input.nextInt();
                     bankAccount.deposite(depositeAmount);
                 }
                 case 2 -> {
-                    LOGGER.log(Level.INFO,"\nEnter the withdraw Amount:");
+                   LOGGER.info("\nEnter the withdraw Amount:");
                     int withdrawAmount = input.nextInt();
                     if (bankAccount.balance >= 100)
                         bankAccount.withdraw(withdrawAmount);
-                    else
-                        LOGGER.log(Level.INFO,Double.toString(bankAccount.balance),"\nMinimum Balance Should be Rs:100 You having Balance Amount="+bankAccount.balance+"0 ");
+                    else {
+                        String print="\nMinimum Balance Should be Rs:100 You having Balance Amount=" + bankAccount.balance + "0 ";
+                        LOGGER.info(print);
+                    }
                 }
                 case 3 -> bankAccount.getAccountDetails();
                 case 4 -> temp1 = 1;
-                default -> LOGGER.log(Level.INFO,"\nInvalid Choice Tryagin\n");
+                default ->LOGGER.info("\nInvalid Choice Tryagin\n");
             }
             if(temp1==1)
             {
-                LOGGER.log(Level.INFO,"\n------Thank You------");
+               LOGGER.info("\n------Thank You------");
                 return;
             }
 
