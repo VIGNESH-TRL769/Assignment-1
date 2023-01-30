@@ -23,7 +23,7 @@ class BankAccount
     {
         balance+=amount;
         String print="\nDeposite of Amount Rs "+amount+".00 is Successfully\n";
-       LOGGER.info(print);
+        LOGGER.info(print);
     }
     public void withdraw(int amount)
     {
@@ -31,10 +31,10 @@ class BankAccount
         {
             balance-=amount;
             String print="\nWithdraw of Amount Rs:"+amount+".00 is Successfully\n";
-           LOGGER.info(print);
+            LOGGER.info(print);
         }
         else
-           LOGGER.info("\nWithdrawal Limit Above Rs:100");
+            LOGGER.info("\nWithdrawal Limit Above Rs:100");
     }
 
 }
@@ -45,45 +45,50 @@ public class Bank  {
     public static void main(String[] args)
     {
         Scanner input=new Scanner(System.in);
-       LOGGER.info("\nEnter the HolderName:");
+        LOGGER.info("\nEnter the HolderName:");
         String name=input.nextLine();
-       LOGGER.info("\nEnter the AccountNumber:");
+        LOGGER.info("\nEnter the AccountNumber:");
         long accountNumber=input.nextLong();
         BankAccount bankAccount=new BankAccount(name,accountNumber);
 
         while(true)
         {
-           LOGGER.info("\n1.deposite\n2.withdraw\n3.balance\n4.Exit\n");
-           LOGGER.info("\nEnter the Choice:");
-            int value=input.nextInt();
-            int temp1=0;
-            switch (value) {
-                case 1 -> {
-                   LOGGER.info("\nEnter the deposite Amount:");
-                    int depositeAmount = input.nextInt();
-                    bankAccount.deposite(depositeAmount);
-                }
-                case 2 -> {
-                   LOGGER.info("\nEnter the withdraw Amount:");
-                    int withdrawAmount = input.nextInt();
-                    if (bankAccount.balance >= 100)
-                        bankAccount.withdraw(withdrawAmount);
-                    else {
-                        String print="\nMinimum Balance Should be Rs:100 You having Balance Amount=" + bankAccount.balance + "0 ";
-                        LOGGER.info(print);
+            try {
+                LOGGER.info("\n1.deposite\n2.withdraw\n3.balance\n4.Exit\n");
+                LOGGER.info("\nEnter the Choice:");
+                int value = input.nextInt();
+                int temp1 = 0;
+                switch (value) {
+                    case 1 -> {
+                        LOGGER.info("\nEnter the deposite Amount:");
+                        int depositeAmount = input.nextInt();
+                        bankAccount.deposite(depositeAmount);
                     }
+                    case 2 -> {
+                        LOGGER.info("\nEnter the withdraw Amount:");
+                        int withdrawAmount = input.nextInt();
+                        if (bankAccount.balance >= 100)
+                            bankAccount.withdraw(withdrawAmount);
+                        else {
+                            String print = "\nMinimum Balance Should be Rs:100 You having Balance Amount=" + bankAccount.balance + "0 ";
+                            LOGGER.info(print);
+                        }
+                    }
+                    case 3 -> bankAccount.getAccountDetails();
+                    case 4 -> temp1 = 1;
+                    default -> LOGGER.info("\nInvalid Choice Tryagin\n");
                 }
-                case 3 -> bankAccount.getAccountDetails();
-                case 4 -> temp1 = 1;
-                default ->LOGGER.info("\nInvalid Choice Tryagin\n");
+                if (temp1 == 1) {
+                    LOGGER.info("\n------Thank You------");
+                    return;
+                }
             }
-            if(temp1==1)
+            catch (Exception e)
             {
-               LOGGER.info("\n------Thank You------");
-                return;
+                String value="Please Enter Valid Numbers:"+e;
+                LOGGER.info(value);
+                input.nextLine();
             }
-
-
         }
 
     }
