@@ -53,6 +53,7 @@ public class Bank  {
 
         while(true)
         {
+          
                 LOGGER.info("\n1.deposite\n2.withdraw\n3.balance\n4.Exit\n");
                 LOGGER.info("\nEnter the Choice:");
                 int value = input.nextInt();
@@ -81,8 +82,6 @@ public class Bank  {
                     LOGGER.info("\n------Thank You------");
                     return;
                 }
-           
-        }
-
+            }
     }
 }
